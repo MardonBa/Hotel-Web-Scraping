@@ -1,3 +1,5 @@
+import scraping_functions as sf
+
 from bs4 import BeautifulSoup
 import pandas as pd
 from matplotlib import pyplot as plt
@@ -29,9 +31,25 @@ text_box.send_keys("los altos")
 submit_button.click()
 
 
+
 ## Setup code for BeautifulSoup scraping
 ## Saving webpages to their respective variables using driver.page_source
 ## Then creating a BeautifulSoup instance title webpagename_soup
+
+## Creating the lists for every criteria as well as prices to be later put in a DataFrame
+hotel_name = []
+king_beds = []
+queen_beds = []
+sofa_beds = []
+view = []
+room_type = []
+room_location = []
+num_rooms = []
+balcony = []
+normal_rate = []
+member_rate = []
+prepaid_normal_rate = []
+prepaid_member_rate = []
 
 ## Residence Inn Palo Alto Mountain View
 while True:
@@ -46,10 +64,13 @@ while True:
 
         ## Goes back to the page with hotels on it
         driver.back() 
-        break
 
     except:
         print("error finding this element by XPATH: ", "Residence Inn Palo Alto Mountain View")
+        break
+
+    else:
+        print(sf.scrape_price(residence_inn_palo_alto_mountain_view_soup))
         break
 
 
@@ -66,10 +87,14 @@ while True:
 
         ## Goes back to the page with hotels on it
         driver.back()
-        break
+
 
     except:
         print("error finding this element by XPATH: ", "Residence Inn Palo Alto Los Altos")
+        break
+
+    else:
+        print(sf.scrape_price(residence_inn_palo_alto_los_altos_soup))
         break
 
 
@@ -86,10 +111,13 @@ while True:
 
         ## Goes back to the page with the hotels on it
         driver.back()
-        break
 
     except:
         print("error finding this element by XPATH: ", "Courtyard Palo Alto Los Altos")
+        break
+
+    else:
+        print(sf.scrape_price(courtyard_palo_alto_los_altos_soup))
         break
 
 
@@ -106,10 +134,13 @@ while True:
 
         ## Goes back to the page with the hotels on it
         driver.back()
-        break
     
     except: 
         print("error finding this element by XPATH: ", "AC Hotel Palo Alto")
+        break
+
+    else:
+        print(sf.scrape_price(ac_hotel_palo_alto_soup))
         break
 
 
@@ -126,10 +157,13 @@ while True:
 
         ## Goes back to the page with the hotels on it
         driver.back()
-        break
     
     except:
         print("error finding this element by XPATH: ", "Hotel Citrine Palo Alto")
+        break
+
+    else:
+        print(sf.scrape_price(hotel_citrine_palo_alto_soup))
         break
 
 
@@ -140,13 +174,27 @@ while True:
         driver.implicitly_wait(1)
         submit_button = driver.find_element(by=By.XPATH, value='//*[@id="property-record-map-SJCAM"]/div/div[2]/div/div/a')
         submit_button.click()
-        time.sleep(5)
+
+        ## Code to navigate from deals to standard prices
+        driver.implicitly_wait(1)
+        submit_button = driver.find_element(by=By.XPATH, value='//*[@id="ui-id-1"]/span[1]')
+        submit_button.click()
+        
+        ## Code to see all rooms (2 are hidden by default)
+        driver.implicitly_wait(1)
+        submit_button = driver.find_element(by=By.CLASS_NAME, value='js-more-label')
+        submit_button.click()
 
         aloft_mountain_view = driver.page_source
         aloft_mountain_view_soup = BeautifulSoup(aloft_mountain_view, "html.parser")
+
+        time.sleep(5)
         
-        break
     
     except:
         print("error finding this element by XPATH: ", "Aloft Mountain View")
         break
+
+    else:
+        print(sf.scrape_price(aloft_mountain_view_soup))
+        break       ## aloft has an option to click for more
