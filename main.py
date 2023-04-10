@@ -9,6 +9,10 @@ import time
 # Selenium import and setup code
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
+
+
 
 options = webdriver.ChromeOptions()
 options.add_argument('headless')
@@ -63,10 +67,11 @@ while True:
         residence_inn_palo_alto_mountain_view_soup = BeautifulSoup(residence_inn_palo_alto_mountain_view, "html.parser")
 
         ## Goes back to the page with hotels on it
-        driver.back() 
+        driver.back()
+           
 
     except:
-        print("error finding this element by XPATH: ", "Residence Inn Palo Alto Mountain View")
+        print("error finding this element by text: ", "Residence Inn Palo Alto Mountain View")
         break
 
     else:
@@ -180,14 +185,15 @@ while True:
         submit_button = driver.find_element(by=By.XPATH, value='//*[@id="ui-id-1"]/span[1]')
         submit_button.click()
         
-        ## Code to see all rooms (2 are hidden by default)
+        ## Code to see all rooms (some are hidden by default)
         driver.implicitly_wait(1)
-        submit_button = driver.find_element(by=By.CLASS_NAME, value='js-more-label')
+        submit_button = driver.find_element(by=By.XPATH, value='//*[@id="tab0"]/div[3]/button')
         submit_button.click()
 
         aloft_mountain_view = driver.page_source
         aloft_mountain_view_soup = BeautifulSoup(aloft_mountain_view, "html.parser")
 
+        print("sleeping")
         time.sleep(5)
         
     
