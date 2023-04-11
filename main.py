@@ -55,7 +55,7 @@ prepaid_normal_rate = []
 prepaid_member_rate = []
 
 ## Residence Inn Palo Alto Mountain View
-"""while True:
+while True:
     ## Navigates to the page with rooms for this hotel
     try:
         driver.implicitly_wait(1)
@@ -74,7 +74,9 @@ prepaid_member_rate = []
         break
 
     else:
-        print(sf.scrape_price(residence_inn_palo_alto_mountain_view_soup))
+        member_rate, normal_rate = sf.scrape_rates_by_type(residence_inn_palo_alto_mountain_view_soup)
+        print("member rates: ", member_rate)
+        print("normal rates: ", normal_rate)
         break
 
 
@@ -98,7 +100,9 @@ while True:
         break
 
     else:
-        print(sf.scrape_price(residence_inn_palo_alto_los_altos_soup))
+        member_rate, normal_rate = sf.scrape_rates_by_type(residence_inn_palo_alto_los_altos_soup)
+        print("member rates: ", member_rate)
+        print("normal rates: ", normal_rate)
         break
 
 
@@ -121,7 +125,9 @@ while True:
         break
 
     else:
-        print(sf.scrape_price(courtyard_palo_alto_los_altos_soup))
+        member_rate, normal_rate = sf.scrape_rates_by_type(courtyard_palo_alto_los_altos_soup)
+        print("member rates: ", member_rate)
+        print("normal rates: ", normal_rate)
         break
 
 
@@ -144,7 +150,9 @@ while True:
         break
 
     else:
-        print(sf.scrape_price(ac_hotel_palo_alto_soup))
+        member_rate, normal_rate = sf.scrape_rates_by_type(ac_hotel_palo_alto_soup)
+        print("member rates: ", member_rate)
+        print("normal rates: ", normal_rate)
         break
 
 
@@ -167,8 +175,10 @@ while True:
         break
 
     else:
-        print(sf.scrape_price(hotel_citrine_palo_alto_soup))
-        break"""
+        member_rate, normal_rate = sf.scrape_rates_by_type(hotel_citrine_palo_alto_soup)
+        print("member rates: ", member_rate)
+        print("normal rates: ", normal_rate)
+        break
 
 
 ## Aloft Mountain View
@@ -192,7 +202,6 @@ while True:
         aloft_mountain_view = driver.page_source
         aloft_mountain_view_soup = BeautifulSoup(aloft_mountain_view, "html.parser")
 
-        print("sleeping")
         time.sleep(5)
         
     
@@ -201,5 +210,7 @@ while True:
         break
 
     else:
-        print(sf.scrape_price(aloft_mountain_view_soup))
+        member_rate, normal_rate = sf.scrape_rates_by_type(aloft_mountain_view_soup)
+        print("member rates: ", member_rate)
+        print("normal rates: ", normal_rate)
         break
