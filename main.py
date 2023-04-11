@@ -13,7 +13,6 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 
 
-
 options = webdriver.ChromeOptions()
 options.add_argument('headless')
 
@@ -56,7 +55,7 @@ prepaid_normal_rate = []
 prepaid_member_rate = []
 
 ## Residence Inn Palo Alto Mountain View
-while True:
+"""while True:
     ## Navigates to the page with rooms for this hotel
     try:
         driver.implicitly_wait(1)
@@ -169,7 +168,7 @@ while True:
 
     else:
         print(sf.scrape_price(hotel_citrine_palo_alto_soup))
-        break
+        break"""
 
 
 ## Aloft Mountain View
@@ -203,4 +202,4 @@ while True:
 
     else:
         print(sf.scrape_price(aloft_mountain_view_soup))
-        break       ## aloft has an option to click for more
+        break

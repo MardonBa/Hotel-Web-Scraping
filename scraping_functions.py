@@ -8,6 +8,7 @@ def clean_data(data, data_type):
 def scrape_price(soup_name):
     prices_list = []
     prices = soup_name.find_all(attrs={'class': "t-font-xl l-display-inline-block l-margin-none t-font-weight-bold"})
+    print(type(prices))
     for price in prices:
         prices_list.append(price.get_text())
 
