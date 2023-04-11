@@ -15,7 +15,7 @@ def scrape_price(soup_name):
         prices_list[i] = clean_data(price, int)
 
     for i in range(len(prices_list) - 1):
-        if (prices_list[i] - prices_list[i + 1]) > 7:
+        if (prices_list[i] - prices_list[i + 1]) > 8:
             prices_list = prices_list[0:i+1]
             break
 
