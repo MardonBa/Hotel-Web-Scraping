@@ -27,7 +27,8 @@ def scrape_rates_by_type(soup_name):
     member_rates = []
     normal_rates = []
 
-    rate_types = soup_name.find_all(attrs={'class': 'description t-description l-margin-none t-font-ml t-line-height-xxl t-font-m'})
+    rate_types = soup_name.find_all(attrs={'class': "description t-description l-margin-none t-font-ml t-line-height-xxl t-font-m"})
+
     for rate_type in rate_types:
         rate_type_list.append(rate_type.get_text())
 
@@ -36,9 +37,9 @@ def scrape_rates_by_type(soup_name):
 
     for i, rate_type in enumerate(rate_type_list):
         print(rate_type)
-        if rate_type == "Member Rate Flexible":
+        if "Member" in rate_type:
             member_rates.append(prices_list[i])
-        elif rate_type == "Flexible Rate":
+        else:
             normal_rates.append(prices_list[i])
 
     return member_rates, normal_rates
