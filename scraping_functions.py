@@ -37,7 +37,7 @@ def scrape_rates_by_type(soup_name):
 
     for i, rate_type in enumerate(rate_type_list):
         print(rate_type)
-        if "Member" in rate_type:
+        if rate_type == "Member Rate Flexible":
             member_rates.append(prices_list[i])
         else:
             normal_rates.append(prices_list[i])
