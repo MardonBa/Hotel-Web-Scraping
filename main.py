@@ -194,10 +194,6 @@ while True:
         submit_button = driver.find_element(by=By.XPATH, value='//*[@id="ui-id-1"]/span[1]')
         submit_button.click()
         
-        ## Code to see all rooms (some are hidden by default)
-        driver.implicitly_wait(1)
-        submit_button = driver.find_element(by=By.XPATH, value='//*[@id="tab0"]/div[3]/button')
-        submit_button.click()
 
         aloft_mountain_view = driver.page_source
         aloft_mountain_view_soup = BeautifulSoup(aloft_mountain_view, "html.parser")
