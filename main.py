@@ -9,8 +9,6 @@ import time
 # Selenium import and setup code
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common.keys import Keys
 
 
 options = webdriver.ChromeOptions()
@@ -74,7 +72,7 @@ while True:
         break
 
     else:
-        member_rate, normal_rate = sf.scrape_rates_by_type(residence_inn_palo_alto_mountain_view_soup)
+        member_rate, normal_rate = sf.scrape_rates_by_type(residence_inn_palo_alto_mountain_view_soup, "description t-description l-margin-none t-font-ml t-line-height-xxl t-font-m")
         print("member rates: ", member_rate)
         print("normal rates: ", normal_rate)
         break
@@ -100,7 +98,7 @@ while True:
         break
 
     else:
-        member_rate, normal_rate = sf.scrape_rates_by_type(residence_inn_palo_alto_los_altos_soup)
+        member_rate, normal_rate = sf.scrape_rates_by_type(residence_inn_palo_alto_los_altos_soup, "description t-description l-margin-none t-font-ml t-line-height-xxl t-font-m")
         print("member rates: ", member_rate)
         print("normal rates: ", normal_rate)
         break
@@ -125,7 +123,7 @@ while True:
         break
 
     else:
-        member_rate, normal_rate = sf.scrape_rates_by_type(courtyard_palo_alto_los_altos_soup)
+        member_rate, normal_rate = sf.scrape_rates_by_type(courtyard_palo_alto_los_altos_soup, "description t-description l-margin-none t-font-ml t-line-height-xxl t-font-m")
         print("member rates: ", member_rate)
         print("normal rates: ", normal_rate)
         break
@@ -150,7 +148,7 @@ while True:
         break
 
     else:
-        member_rate, normal_rate = sf.scrape_rates_by_type(ac_hotel_palo_alto_soup)
+        member_rate, normal_rate = sf.scrape_rates_by_type(ac_hotel_palo_alto_soup, "description t-description l-margin-none t-font-ml t-line-height-xxl t-font-m")
         print("member rates: ", member_rate)
         print("normal rates: ", normal_rate)
         break
@@ -175,7 +173,7 @@ while True:
         break
 
     else:
-        member_rate, normal_rate = sf.scrape_rates_by_type(hotel_citrine_palo_alto_soup)
+        member_rate, normal_rate = sf.scrape_rates_by_type(hotel_citrine_palo_alto_soup, "description t-description l-margin-none t-font-ml t-line-height-xxl t-font-m")
         print("member rates: ", member_rate)
         print("normal rates: ", normal_rate)
         break
@@ -206,7 +204,7 @@ while True:
         break
 
     else:
-        member_rate, normal_rate = sf.scrape_rates_by_type(aloft_mountain_view_soup)
+        member_rate, normal_rate = sf.scrape_rates_by_type(aloft_mountain_view_soup, "description t-description l-margin-none t-font-ml t-line-height-xxl t-font-m")
         print("member rates: ", member_rate)
         print("normal rates: ", normal_rate)
         break
