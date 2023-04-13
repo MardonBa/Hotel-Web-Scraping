@@ -38,6 +38,7 @@ def scrape_rates_by_type(soup_name, class_name):
     for i, rate_type in enumerate(rate_type_list):
         rate_type_list[i] = clean_data(rate_type)
 
+    print(rate_type_list)
     ## Code to add the rate to member or normal rates
     for i, rate_type in enumerate(rate_type_list):
         rate_type = rate_type_list[i]
@@ -54,3 +55,6 @@ def scrape_rates_by_type(soup_name, class_name):
 
     return member_rates, normal_rates
     
+
+def scrape_criteria(soup_name):
+    pass

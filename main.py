@@ -72,9 +72,13 @@ while True:
         break
 
     else:
-        member_rate, normal_rate = sf.scrape_rates_by_type(residence_inn_palo_alto_mountain_view_soup, "description t-description l-margin-none t-font-ml t-line-height-xxl t-font-m")
-        print("member rates: ", member_rate)
-        print("normal rates: ", normal_rate)
+        ripamv_scraped_member_rate, ripamv_sscraped_normal_rate = sf.scrape_rates_by_type(residence_inn_palo_alto_mountain_view_soup, "description t-description l-margin-none t-font-ml t-line-height-xxl t-font-m")
+        print("member rates: ", ripamv_scraped_member_rate)
+        for rate in ripamv_scraped_member_rate:
+            member_rate.append(rate)
+        print("normal rates: ", ripamv_sscraped_normal_rate)
+        for rate in ripamv_sscraped_normal_rate:
+            normal_rate.append(rate)
         break
 
 
@@ -98,9 +102,13 @@ while True:
         break
 
     else:
-        member_rate, normal_rate = sf.scrape_rates_by_type(residence_inn_palo_alto_los_altos_soup, "description t-description l-margin-none t-font-ml t-line-height-xxl t-font-m")
-        print("member rates: ", member_rate)
-        print("normal rates: ", normal_rate)
+        ripala_scraped_member_rate, ripala_scraped_normal_rate = sf.scrape_rates_by_type(residence_inn_palo_alto_los_altos_soup, "description t-description l-margin-none t-font-ml t-line-height-xxl t-font-m")
+        print("member rates: ", ripala_scraped_member_rate)
+        for rate in ripala_scraped_member_rate:
+            member_rate.append(rate)
+        print("normal rates: ", ripala_scraped_normal_rate)
+        for rate in ripala_scraped_normal_rate:
+            normal_rate.append(rate)
         break
 
 
@@ -123,9 +131,13 @@ while True:
         break
 
     else:
-        member_rate, normal_rate = sf.scrape_rates_by_type(courtyard_palo_alto_los_altos_soup, "description t-description l-margin-none t-font-ml t-line-height-xxl t-font-m")
-        print("member rates: ", member_rate)
-        print("normal rates: ", normal_rate)
+        cpala_scraped_member_rate, cpala_scraped_normal_rate = sf.scrape_rates_by_type(courtyard_palo_alto_los_altos_soup, "description t-description l-margin-none t-font-ml t-line-height-xxl t-font-m")
+        print("member rates: ", cpala_scraped_member_rate)
+        for rate in cpala_scraped_member_rate:
+            member_rate.append(rate)
+        print("normal rates: ", cpala_scraped_normal_rate)
+        for rate in cpala_scraped_normal_rate:
+            normal_rate.append(rate)
         break
 
 
@@ -148,9 +160,13 @@ while True:
         break
 
     else:
-        member_rate, normal_rate = sf.scrape_rates_by_type(ac_hotel_palo_alto_soup, "description t-description l-margin-none t-font-ml t-line-height-xxl t-font-m")
-        print("member rates: ", member_rate)
-        print("normal rates: ", normal_rate)
+        achpa_scraped_member_rate, achpa_scraped_normal_rate = sf.scrape_rates_by_type(ac_hotel_palo_alto_soup, "description t-description l-margin-none t-font-ml t-line-height-xxl t-font-m")
+        print("member rates: ", achpa_scraped_member_rate)
+        for rate in achpa_scraped_member_rate:
+            member_rate.append(rate)
+        print("normal rates: ", achpa_scraped_normal_rate)
+        for rate in achpa_scraped_normal_rate:
+            normal_rate.append(rate)
         break
 
 
@@ -173,9 +189,13 @@ while True:
         break
 
     else:
-        member_rate, normal_rate = sf.scrape_rates_by_type(hotel_citrine_palo_alto_soup, "description t-description l-margin-none t-font-ml t-line-height-xxl t-font-m")
-        print("member rates: ", member_rate)
-        print("normal rates: ", normal_rate)
+        hcpa_scraped_member_rate, hcpa_scraped_normal_rate = sf.scrape_rates_by_type(hotel_citrine_palo_alto_soup, "description t-description l-margin-none t-font-ml t-line-height-xxl t-font-m")
+        print("member rates: ", hcpa_scraped_member_rate)
+        for rate in hcpa_scraped_member_rate:
+            member_rate.append(rate)
+        print("normal rates: ", hcpa_scraped_normal_rate)
+        for rate in hcpa_scraped_normal_rate:
+            normal_rate.append(rate)
         break
 
 
@@ -204,7 +224,15 @@ while True:
         break
 
     else:
-        member_rate, normal_rate = sf.scrape_rates_by_type(aloft_mountain_view_soup, "description t-description l-margin-none t-font-ml t-line-height-xxl t-font-m")
-        print("member rates: ", member_rate)
-        print("normal rates: ", normal_rate)
+        amv_scraped_member_rate, amv_scraped_normal_rate = sf.scrape_rates_by_type(aloft_mountain_view_soup, "description t-description l-margin-none t-font-ml t-line-height-xxl t-font-m")
+        print("member rates: ", amv_scraped_member_rate)
+        for rate in amv_scraped_member_rate:
+            member_rate.append(rate)
+        print("normal rates: ", amv_scraped_normal_rate)
+        for rate in amv_scraped_normal_rate:
+            normal_rate.append(rate)
         break
+
+
+print(member_rate)
+print(normal_rate)
