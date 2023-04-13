@@ -72,13 +72,20 @@ while True:
         break
 
     else:
-        ripamv_scraped_member_rate, ripamv_sscraped_normal_rate = sf.scrape_rates_by_type(residence_inn_palo_alto_mountain_view_soup, "description t-description l-margin-none t-font-ml t-line-height-xxl t-font-m")
+        ## Adds prices to lists
+        ripamv_scraped_member_rate, ripamv_scraped_normal_rate = sf.scrape_rates_by_type(residence_inn_palo_alto_mountain_view_soup, "description t-description l-margin-none t-font-ml t-line-height-xxl t-font-m")
         print("member rates: ", ripamv_scraped_member_rate)
         for rate in ripamv_scraped_member_rate:
             member_rate.append(rate)
-        print("normal rates: ", ripamv_sscraped_normal_rate)
-        for rate in ripamv_sscraped_normal_rate:
+        print("normal rates: ", ripamv_scraped_normal_rate)
+        for rate in ripamv_scraped_normal_rate:
             normal_rate.append(rate)
+
+        ## Adds hotel names to lists
+        for i in ripamv_scraped_member_rate:
+            hotel_name.append("Residence Inn Palo Alto Mountain View")
+
+        sf.scrape_criteria(residence_inn_palo_alto_mountain_view_soup, len(ripamv_scraped_member_rate))
         break
 
 
@@ -109,6 +116,11 @@ while True:
         print("normal rates: ", ripala_scraped_normal_rate)
         for rate in ripala_scraped_normal_rate:
             normal_rate.append(rate)
+
+
+        ## Adds hotel names to lists
+        for i in ripala_scraped_member_rate:
+            hotel_name.append("Residence Inn Palo Alto Los Altos")
         break
 
 
@@ -138,6 +150,10 @@ while True:
         print("normal rates: ", cpala_scraped_normal_rate)
         for rate in cpala_scraped_normal_rate:
             normal_rate.append(rate)
+
+        ## Adds hotel names to lists
+        for i in cpala_scraped_member_rate:
+            hotel_name.append("Courtyard Palo Alto Los Altos")
         break
 
 
@@ -167,6 +183,10 @@ while True:
         print("normal rates: ", achpa_scraped_normal_rate)
         for rate in achpa_scraped_normal_rate:
             normal_rate.append(rate)
+
+        ## Adds hotel names to lists
+        for i in achpa_scraped_member_rate:
+            hotel_name.append("AC Hotel Palo Alto")
         break
 
 
@@ -196,6 +216,10 @@ while True:
         print("normal rates: ", hcpa_scraped_normal_rate)
         for rate in hcpa_scraped_normal_rate:
             normal_rate.append(rate)
+
+        ## Adds hotel names to lists
+        for i in hcpa_scraped_member_rate:
+            hotel_name.append("Hotel Citrine Palo Alto")
         break
 
 
@@ -231,8 +255,13 @@ while True:
         print("normal rates: ", amv_scraped_normal_rate)
         for rate in amv_scraped_normal_rate:
             normal_rate.append(rate)
+
+        ## Adds hotel names to lists
+        for i in amv_scraped_member_rate:
+            hotel_name.append("Aloft Mountain View")
         break
 
 
 print(member_rate)
 print(normal_rate)
+print(hotel_name)

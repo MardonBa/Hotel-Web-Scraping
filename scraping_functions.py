@@ -56,5 +56,16 @@ def scrape_rates_by_type(soup_name, class_name):
     return member_rates, normal_rates
     
 
-def scrape_criteria(soup_name):
-    pass
+def scrape_criteria(soup_name, num_prices):
+    room_name_list = []
+
+    room_names = soup_name.find_all(attrs={'class': 'l-l-col-8 l-xl-col-8'})
+
+    for name in room_names:
+        room_name_list.append(name.get_text())
+
+    for i, room in enumerate(room_name_list):
+        room_name_list[i] = clean_data(room)
+
+    print(room_name_list)
+
