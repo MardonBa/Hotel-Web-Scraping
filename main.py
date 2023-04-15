@@ -63,8 +63,6 @@ while True:
         residence_inn_palo_alto_mountain_view = driver.page_source
         residence_inn_palo_alto_mountain_view_soup = BeautifulSoup(residence_inn_palo_alto_mountain_view, "html.parser")
 
-        ## Goes back to the page with hotels on it
-        driver.back()
            
 
     except:
@@ -72,6 +70,9 @@ while True:
         break
 
     else:
+        ## Goes back to the page with hotels on it
+        driver.back()
+
         ## Adds prices to lists
         ripamv_scraped_member_rate, ripamv_scraped_normal_rate = sf.scrape_rates_by_type(residence_inn_palo_alto_mountain_view_soup, "description t-description l-margin-none t-font-ml t-line-height-xxl t-font-m")
         print("member rates: ", ripamv_scraped_member_rate)
@@ -85,7 +86,9 @@ while True:
         for i in ripamv_scraped_member_rate:
             hotel_name.append("Residence Inn Palo Alto Mountain View")
 
-        sf.scrape_criteria(residence_inn_palo_alto_mountain_view_soup, len(ripamv_scraped_member_rate))
+        room_types = sf.scrape_criteria(residence_inn_palo_alto_mountain_view_soup, len(ripamv_scraped_member_rate))
+        for i in range(len(ripamv_scraped_normal_rate)):
+            room_type.append(room_types[i])
         break
 
 
@@ -100,15 +103,16 @@ while True:
         residence_inn_palo_alto_los_altos = driver.page_source
         residence_inn_palo_alto_los_altos_soup = BeautifulSoup(residence_inn_palo_alto_los_altos, "html.parser")
 
-        ## Goes back to the page with hotels on it
-        driver.back()
-
 
     except:
         print("error finding this element by XPATH: ", "Residence Inn Palo Alto Los Altos")
         break
 
     else:
+        ## Goes back to the page with hotels on it
+        driver.back()
+
+        ## Ads prices to lists
         ripala_scraped_member_rate, ripala_scraped_normal_rate = sf.scrape_rates_by_type(residence_inn_palo_alto_los_altos_soup, "description t-description l-margin-none t-font-ml t-line-height-xxl t-font-m")
         print("member rates: ", ripala_scraped_member_rate)
         for rate in ripala_scraped_member_rate:
@@ -121,6 +125,10 @@ while True:
         ## Adds hotel names to lists
         for i in ripala_scraped_member_rate:
             hotel_name.append("Residence Inn Palo Alto Los Altos")
+
+        room_types = sf.scrape_criteria(residence_inn_palo_alto_los_altos_soup, len(ripala_scraped_member_rate))
+        for i in range(len(ripala_scraped_member_rate)):
+            room_type.append(room_types[i])
         break
 
 
@@ -135,14 +143,15 @@ while True:
         courtyard_palo_alto_los_altos = driver.page_source
         courtyard_palo_alto_los_altos_soup = BeautifulSoup(courtyard_palo_alto_los_altos, "html.parser")
 
-        ## Goes back to the page with the hotels on it
-        driver.back()
 
     except:
         print("error finding this element by XPATH: ", "Courtyard Palo Alto Los Altos")
         break
 
     else:
+        ## Goes back to the page with hotels on it
+        driver.back()
+
         cpala_scraped_member_rate, cpala_scraped_normal_rate = sf.scrape_rates_by_type(courtyard_palo_alto_los_altos_soup, "description t-description l-margin-none t-font-ml t-line-height-xxl t-font-m")
         print("member rates: ", cpala_scraped_member_rate)
         for rate in cpala_scraped_member_rate:
@@ -154,6 +163,10 @@ while True:
         ## Adds hotel names to lists
         for i in cpala_scraped_member_rate:
             hotel_name.append("Courtyard Palo Alto Los Altos")
+
+        room_types = sf.scrape_criteria(courtyard_palo_alto_los_altos_soup, len(cpala_scraped_member_rate))
+        for i in range(len(cpala_scraped_member_rate)):
+            room_type.append(room_types[i])
         break
 
 
@@ -168,14 +181,15 @@ while True:
         ac_hotel_palo_alto = driver.page_source
         ac_hotel_palo_alto_soup = BeautifulSoup(ac_hotel_palo_alto, "html.parser")
 
-        ## Goes back to the page with the hotels on it
-        driver.back()
-    
+
     except: 
         print("error finding this element by XPATH: ", "AC Hotel Palo Alto")
         break
 
     else:
+        ## Goes back to the page with hotels on it
+        driver.back()
+
         achpa_scraped_member_rate, achpa_scraped_normal_rate = sf.scrape_rates_by_type(ac_hotel_palo_alto_soup, "description t-description l-margin-none t-font-ml t-line-height-xxl t-font-m")
         print("member rates: ", achpa_scraped_member_rate)
         for rate in achpa_scraped_member_rate:
@@ -187,6 +201,10 @@ while True:
         ## Adds hotel names to lists
         for i in achpa_scraped_member_rate:
             hotel_name.append("AC Hotel Palo Alto")
+
+        room_types = sf.scrape_criteria(ac_hotel_palo_alto_soup, len(achpa_scraped_member_rate))
+        for i in range(len(achpa_scraped_member_rate)):
+            room_type.append(room_types[i])
         break
 
 
@@ -201,14 +219,15 @@ while True:
         hotel_citrine_palo_alto = driver.page_source
         hotel_citrine_palo_alto_soup = BeautifulSoup(hotel_citrine_palo_alto, "html.parser")
 
-        ## Goes back to the page with the hotels on it
-        driver.back()
     
     except:
         print("error finding this element by XPATH: ", "Hotel Citrine Palo Alto")
         break
 
     else:
+        ## Goes back to the page with hotels on it
+        driver.back()
+
         hcpa_scraped_member_rate, hcpa_scraped_normal_rate = sf.scrape_rates_by_type(hotel_citrine_palo_alto_soup, "description t-description l-margin-none t-font-ml t-line-height-xxl t-font-m")
         print("member rates: ", hcpa_scraped_member_rate)
         for rate in hcpa_scraped_member_rate:
@@ -220,6 +239,10 @@ while True:
         ## Adds hotel names to lists
         for i in hcpa_scraped_member_rate:
             hotel_name.append("Hotel Citrine Palo Alto")
+
+        room_types = sf.scrape_criteria(hotel_citrine_palo_alto_soup, len(hcpa_scraped_member_rate))
+        for i in range(len(hcpa_scraped_member_rate)):
+            room_type.append(room_types[i])
         break
 
 
@@ -259,9 +282,15 @@ while True:
         ## Adds hotel names to lists
         for i in amv_scraped_member_rate:
             hotel_name.append("Aloft Mountain View")
-        break
 
+        room_types = sf.scrape_criteria(aloft_mountain_view_soup, len(amv_scraped_member_rate))
+        print(len(room_types))
+        print(len(amv_scraped_member_rate))
+        for i in range(len(amv_scraped_member_rate)):
+            room_type.append(room_types[i])
+        break
 
 print(member_rate)
 print(normal_rate)
 print(hotel_name)
+print(room_type)

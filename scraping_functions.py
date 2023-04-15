@@ -39,6 +39,7 @@ def scrape_rates_by_type(soup_name, class_name):
         rate_type_list[i] = clean_data(rate_type)
 
     print(rate_type_list)
+    print(len(rate_type_list), "rate type list length")
     ## Code to add the rate to member or normal rates
     for i, rate_type in enumerate(rate_type_list):
         rate_type = rate_type_list[i]
@@ -61,11 +62,57 @@ def scrape_criteria(soup_name, num_prices):
 
     room_names = soup_name.find_all(attrs={'class': 'l-l-col-8 l-xl-col-8'})
 
+
     for name in room_names:
         room_name_list.append(name.get_text())
 
     for i, room in enumerate(room_name_list):
         room_name_list[i] = clean_data(room)
-
+    
     print(room_name_list)
+    print(len(room_name_list))
+    room_type = []
+    for i in range(num_prices):
+        ## Code to add the room type to its own list
+        ## Residence Inn Palo Alto Mountain View
+        ## Removes it from the string to prevent interference with counting beds
+        if "King Studio" in room_name_list[i]:
+            room_name_list[i] = room_name_list[i].replace("King Studio", "")
+            room_type.append("King Studio")
+        if "Queen Studio" in room_name_list[i]:
+            room_name_list[i] = room_name_list[i].replace("Queen Studio", "")
+            room_type.append("Queen Studio")
+        if "Penthouse Suite, " in room_name_list[i]:
+            room_name_list[i] = room_name_list[i].replace("Penthouse Suite", "")
+            room_type.append("Penthouse Suite")
+
+        ## Aloft Palo Alto
+        elif "Aloft Room" in room_name_list[i]:
+            room_type.append("Aloft Room")
+        elif "Breezy Guest Room" in room_name_list[i]:
+            room_type.append("Breezy Guest Room")
+        elif "Savvy Plus Guest Room" in room_name_list[i]:
+            room_type.append("Savvy Plus Guest Room")
+        elif "Junior Suite" in room_name_list[i]:
+            room_type.append("Junior Suite")
+
+        ## Residence Inn Palo Alto Los Altos
+        if "Studio" in room_name_list[i]:
+            room_type.append("Studio")
+        if "Suite" in room_name_list[i]:
+            room_type.append("Suite")
+
+        ## Courtyard Palo Alto Los Altos, AC Hotel Palo Alto, Hotel Citrine, 
+        if "Larger Guest room" in room_name_list[i]:
+            room_type.append("Larger Guest Room")
+        elif "Deluxe Guest room" in room_name_list[i]:
+            room_type.append("Deluxe Guest room")
+        elif "Guest room" in room_name_list[i]:
+            room_type.append("Guest room")
+        ## No need to add code for suite because it is above
+
+    
+
+    print(room_type)
+    return room_type
 
