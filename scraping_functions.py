@@ -20,7 +20,7 @@ def scrape_price(soup_name):
     return prices_list
 
 ## soup_name should be the BeautifulSoup instance for the hotel, class_name should be a css class as a string
-def scrape_rates_by_type(soup_name, class_name):
+def scrape_rates_by_type(soup_name):
 
     ## Initializing code
     prices_list = scrape_price(soup_name)
@@ -29,7 +29,7 @@ def scrape_rates_by_type(soup_name, class_name):
     member_rates = []
     normal_rates = []
 
-    rate_types = soup_name.find_all(attrs={'class': class_name})
+    rate_types = soup_name.find_all(attrs={'class': 'description t-description l-margin-none t-font-ml t-line-height-xxl t-font-m'})
 
     for rate_type in rate_types:
         rate_type_list.append(rate_type.get_text())
@@ -57,20 +57,7 @@ def scrape_rates_by_type(soup_name, class_name):
     return member_rates, normal_rates
     
 
-def scrape_criteria(soup_name, num_prices):
-    room_name_list = []
-
-    room_names = soup_name.find_all(attrs={'class': 'l-l-col-8 l-xl-col-8'})
-
-
-    for name in room_names:
-        room_name_list.append(name.get_text())
-
-    for i, room in enumerate(room_name_list):
-        room_name_list[i] = clean_data(room)
-    
-    print(room_name_list)
-    print(len(room_name_list))
+def scrape_room_types(room_name_list, num_prices):
     room_type = []
     for i in range(num_prices):
         ## Code to add the room type to its own list
@@ -86,6 +73,20 @@ def scrape_criteria(soup_name, num_prices):
             room_name_list[i] = room_name_list[i].replace("Penthouse Suite", "")
             room_type.append("Penthouse Suite")
 
+        ## Residence Inn Palo Alto
+        if "Studio" in room_name_list[i]:
+            room_type.append("Studio")
+        if "Suite" in room_name_list[i]:
+            room_type.append("Suite")
+        
+        ## Courtyard Palo Alto Los Altos, AC Hotel Palo Alto, Hotel Citrine 
+        if "Guest room" in room_name_list[i]:
+            room_type.append("Guest room")
+        if "Larger Guest room" in room_name_list[i]:
+            room_type.append("Larger Guest room")
+        if "Deluxe Guest room" in room_name_list[i]:
+            room_type.append("Deluxe Guest room")
+
         ## Aloft Palo Alto
         elif "Aloft Room" in room_name_list[i]:
             room_type.append("Aloft Room")
@@ -96,23 +97,57 @@ def scrape_criteria(soup_name, num_prices):
         elif "Junior Suite" in room_name_list[i]:
             room_type.append("Junior Suite")
 
-        ## Residence Inn Palo Alto Los Altos
-        if "Studio" in room_name_list[i]:
-            room_type.append("Studio")
-        if "Suite" in room_name_list[i]:
-            room_type.append("Suite")
+    return room_type, room_name_list        ## room_name_list is returned so that the strings that would interfere in Residence Inn Palo Alto Mountain View don't affect later code
 
-        ## Courtyard Palo Alto Los Altos, AC Hotel Palo Alto, Hotel Citrine, 
-        if "Larger Guest room" in room_name_list[i]:
-            room_type.append("Larger Guest Room")
-        elif "Deluxe Guest room" in room_name_list[i]:
-            room_type.append("Deluxe Guest room")
-        elif "Guest room" in room_name_list[i]:
-            room_type.append("Guest room")
-        ## No need to add code for suite because it is above
+def scrape_beds(room_name_list, num_prices):
+    king_beds = []
+    queen_beds = []
+    sofa_beds = []
+    print(room_name_list)
+    for i in range(num_prices):
+        ## Code to add the number of each bed to its respective list
+        ## N/A if a bed type is not in the room
+        if "King" in room_name_list[i]:
+            king_index = room_name_list[i].index("King")
+            king_beds.append(int(room_name_list[i][king_index -  2]))
+        else: 
+            king_beds.append("N/A")
+
+        if "Queen" in room_name_list[i]:
+            queen_index = room_name_list[i].index("Queen")
+            print(queen_index)
+            queen_beds.append(int(room_name_list[i][queen_index - 2]))
+        else: 
+            queen_beds.append("N/A")
+
+        if "Sofa bed" in room_name_list[i]:
+            sofa_beds.append(1)
+        else:
+            sofa_beds.append("N/A")
+        
+
+    return king_beds, queen_beds, sofa_beds
+
+
+
+    
+
+def scrape_criteria(soup_name, num_prices):
+    room_name_list = []
+    room_names = soup_name.find_all(attrs={'class': 'l-l-col-8 l-xl-col-8'})
+    for name in room_names:
+        room_name_list.append(name.get_text())
+    ## Cleans the data
+    for i, room in enumerate(room_name_list):
+        room_name_list[i] = clean_data(room)
+
+    
+
+    room_type, new_room_name_list = scrape_room_types(room_name_list, num_prices)
+    king_beds, queen_beds, sofa_beds = scrape_beds(new_room_name_list, num_prices)
 
     
 
     print(room_type)
-    return room_type
+    return room_type, king_beds, queen_beds, sofa_beds
 
