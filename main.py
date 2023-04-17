@@ -9,26 +9,17 @@ import numpy as np
 ## GUI Setup Code
 import tkinter as tk
 
-root = tk.Tk()
-frame = tk.Frame(root)
-frame.pack()
+window = tk.Tk()
 
-bottomframe = tk.Frame(root)
-bottomframe.pack( side = tk.BOTTOM )
+label = tk.Label(
+    text="Hello, Tkinter",
+    foreground="white",  # Set the text color to white
+    background="black"  # Set the background color to black
+)
 
-redbutton = tk.Button(frame, text="Red", fg="red")
-redbutton.pack( side = tk.LEFT)
+label.pack()
 
-greenbutton = tk.Button(frame, text="green", fg="green")
-greenbutton.pack( side = tk.LEFT )
-
-bluebutton = tk.Button(frame, text="Blue", fg="blue")
-bluebutton.pack( side = tk.LEFT )
-
-blackbutton = tk.Button(bottomframe, text="Black", fg="black")
-blackbutton.pack( side = tk.BOTTOM)
-
-root.mainloop()
+window.mainloop()
 
 # Selenium import and setup code
 from selenium import webdriver
