@@ -6,8 +6,29 @@ from matplotlib import pyplot as plt
 import numpy as np
 
 
+## GUI Setup Code
+import tkinter as tk
 
+root = tk.Tk()
+frame = tk.Frame(root)
+frame.pack()
 
+bottomframe = tk.Frame(root)
+bottomframe.pack( side = tk.BOTTOM )
+
+redbutton = tk.Button(frame, text="Red", fg="red")
+redbutton.pack( side = tk.LEFT)
+
+greenbutton = tk.Button(frame, text="green", fg="green")
+greenbutton.pack( side = tk.LEFT )
+
+bluebutton = tk.Button(frame, text="Blue", fg="blue")
+bluebutton.pack( side = tk.LEFT )
+
+blackbutton = tk.Button(bottomframe, text="Black", fg="black")
+blackbutton.pack( side = tk.BOTTOM)
+
+root.mainloop()
 
 # Selenium import and setup code
 from selenium import webdriver
@@ -26,6 +47,7 @@ driver.get("https://www.marriott.com/default.mi")
 
 
 driver.implicitly_wait(0.5)
+
 
 ## Navigates the page with the hotels on it
 text_box = driver.find_element(by=By.NAME, value="destinationAddress.destination")
@@ -342,3 +364,4 @@ dict = {
 df = pd.DataFrame(dict)
 pd.set_option('display.max_columns', None)
 print(df.to_string())
+
