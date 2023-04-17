@@ -4,7 +4,10 @@ from bs4 import BeautifulSoup
 import pandas as pd
 from matplotlib import pyplot as plt
 import numpy as np
-import time
+
+
+
+
 
 # Selenium import and setup code
 from selenium import webdriver
@@ -57,7 +60,7 @@ while True:
     ## Navigates to the page with rooms for this hotel
     try:
         driver.implicitly_wait(1)
-        submit_button = driver.find_element(by=By.XPATH, value='//*[@id="property-record-map-SFOMV"]/div/div[2]/div/div/a')
+        submit_button = driver.find_element(by=By.XPATH, value='//*[@id="property-record-map-SFOMV"]/div/div[2]/div/div/a/div')
         submit_button.click()
 
         residence_inn_palo_alto_mountain_view = driver.page_source
@@ -75,10 +78,8 @@ while True:
 
         ## Adds prices to lists
         ripamv_scraped_member_rate, ripamv_scraped_normal_rate = sf.scrape_rates_by_type(residence_inn_palo_alto_mountain_view_soup)
-        print("member rates: ", ripamv_scraped_member_rate)
         for rate in ripamv_scraped_member_rate:
             member_rate.append(rate)
-        print("normal rates: ", ripamv_scraped_normal_rate)
         for rate in ripamv_scraped_normal_rate:
             normal_rate.append(rate)
 
@@ -86,12 +87,16 @@ while True:
         for i in ripamv_scraped_member_rate:
             hotel_name.append("Residence Inn Palo Alto Mountain View")
 
-        room_types, hotel_king_beds, hotel_queen_beds, hotel_sofa_beds = sf.scrape_criteria(residence_inn_palo_alto_mountain_view_soup, len(ripamv_scraped_member_rate))
+        room_types, hotel_king_beds, hotel_queen_beds, hotel_sofa_beds, views, location_list, balcony_exists, hotel_num_rooms = sf.scrape_criteria(residence_inn_palo_alto_mountain_view_soup, len(ripamv_scraped_member_rate))
         for i in range(len(ripamv_scraped_normal_rate)):
             room_type.append(room_types[i])
             king_beds.append(hotel_king_beds[i])
             queen_beds.append(hotel_queen_beds[i])
             sofa_beds.append(hotel_sofa_beds[i])
+            view.append(views[i])
+            room_location.append(location_list[i])
+            balcony.append(balcony_exists[i])
+            num_rooms.append(hotel_num_rooms[i])
         break
 
 
@@ -117,10 +122,8 @@ while True:
 
         ## Ads prices to lists
         ripala_scraped_member_rate, ripala_scraped_normal_rate = sf.scrape_rates_by_type(residence_inn_palo_alto_los_altos_soup)
-        print("member rates: ", ripala_scraped_member_rate)
         for rate in ripala_scraped_member_rate:
             member_rate.append(rate)
-        print("normal rates: ", ripala_scraped_normal_rate)
         for rate in ripala_scraped_normal_rate:
             normal_rate.append(rate)
 
@@ -129,12 +132,16 @@ while True:
         for i in ripala_scraped_member_rate:
             hotel_name.append("Residence Inn Palo Alto Los Altos")
 
-        room_types, hotel_king_beds, hotel_queen_beds, hotel_sofa_beds = sf.scrape_criteria(residence_inn_palo_alto_los_altos_soup, len(ripala_scraped_member_rate))
+        room_types, hotel_king_beds, hotel_queen_beds, hotel_sofa_beds, views, location_list, balcony_exists, hotel_num_rooms = sf.scrape_criteria(residence_inn_palo_alto_los_altos_soup, len(ripala_scraped_member_rate))
         for i in range(len(ripala_scraped_member_rate)):
             room_type.append(room_types[i])
             king_beds.append(hotel_king_beds[i])
             queen_beds.append(hotel_queen_beds[i])
             sofa_beds.append(hotel_sofa_beds[i])
+            view.append(views[i])
+            room_location.append(location_list[i])
+            balcony.append(balcony_exists[i])
+            num_rooms.append(hotel_num_rooms[i])
         break
 
 
@@ -159,10 +166,8 @@ while True:
         driver.back()
 
         cpala_scraped_member_rate, cpala_scraped_normal_rate = sf.scrape_rates_by_type(courtyard_palo_alto_los_altos_soup)
-        print("member rates: ", cpala_scraped_member_rate)
         for rate in cpala_scraped_member_rate:
             member_rate.append(rate)
-        print("normal rates: ", cpala_scraped_normal_rate)
         for rate in cpala_scraped_normal_rate:
             normal_rate.append(rate)
 
@@ -170,12 +175,16 @@ while True:
         for i in cpala_scraped_member_rate:
             hotel_name.append("Courtyard Palo Alto Los Altos")
 
-        room_types, hotel_king_beds, hotel_queen_beds, hotel_sofa_beds = sf.scrape_criteria(courtyard_palo_alto_los_altos_soup, len(cpala_scraped_member_rate))
+        room_types, hotel_king_beds, hotel_queen_beds, hotel_sofa_beds, views, location_list, balcony_exists, hotel_num_rooms = sf.scrape_criteria(courtyard_palo_alto_los_altos_soup, len(cpala_scraped_member_rate))
         for i in range(len(cpala_scraped_member_rate)):
             room_type.append(room_types[i])
             king_beds.append(hotel_king_beds[i])
             queen_beds.append(hotel_queen_beds[i])
             sofa_beds.append(hotel_sofa_beds[i])
+            view.append(views[i])
+            room_location.append(location_list[i])
+            balcony.append(balcony_exists[i])
+            num_rooms.append(hotel_num_rooms[i])
         break
 
 
@@ -200,10 +209,8 @@ while True:
         driver.back()
 
         achpa_scraped_member_rate, achpa_scraped_normal_rate = sf.scrape_rates_by_type(ac_hotel_palo_alto_soup)
-        print("member rates: ", achpa_scraped_member_rate)
         for rate in achpa_scraped_member_rate:
             member_rate.append(rate)
-        print("normal rates: ", achpa_scraped_normal_rate)
         for rate in achpa_scraped_normal_rate:
             normal_rate.append(rate)
 
@@ -211,12 +218,16 @@ while True:
         for i in achpa_scraped_member_rate:
             hotel_name.append("AC Hotel Palo Alto")
 
-        room_types, hotel_king_beds, hotel_queen_beds, hotel_sofa_beds = sf.scrape_criteria(ac_hotel_palo_alto_soup, len(achpa_scraped_member_rate))
+        room_types, hotel_king_beds, hotel_queen_beds, hotel_sofa_beds, views, location_list, balcony_exists, hotel_num_rooms = sf.scrape_criteria(ac_hotel_palo_alto_soup, len(achpa_scraped_member_rate))
         for i in range(len(achpa_scraped_member_rate)):
             room_type.append(room_types[i])
             king_beds.append(hotel_king_beds[i])
             queen_beds.append(hotel_queen_beds[i])
             sofa_beds.append(hotel_sofa_beds[i])
+            view.append(views[i])
+            room_location.append(location_list[i])
+            balcony.append(balcony_exists[i])
+            num_rooms.append(hotel_num_rooms[i])
         break
 
 
@@ -225,7 +236,7 @@ while True:
     ## Navigate to the page with the rooms for this hotel
     try:
         driver.implicitly_wait(1)
-        submit_button = driver.find_element(by=By.XPATH, value='//*[@id="property-record-map-SJCTX"]/div/div[2]/div/div/a')
+        submit_button = driver.find_element(by=By.XPATH, value='//*[@id="property-record-map-SJCTX"]/div/div[2]/div/div/a/div')
         submit_button.click()
 
         hotel_citrine_palo_alto = driver.page_source
@@ -241,10 +252,8 @@ while True:
         driver.back()
 
         hcpa_scraped_member_rate, hcpa_scraped_normal_rate = sf.scrape_rates_by_type(hotel_citrine_palo_alto_soup)
-        print("member rates: ", hcpa_scraped_member_rate)
         for rate in hcpa_scraped_member_rate:
             member_rate.append(rate)
-        print("normal rates: ", hcpa_scraped_normal_rate)
         for rate in hcpa_scraped_normal_rate:
             normal_rate.append(rate)
 
@@ -252,12 +261,16 @@ while True:
         for i in hcpa_scraped_member_rate:
             hotel_name.append("Hotel Citrine Palo Alto")
 
-        room_types, hotel_king_beds, hotel_queen_beds, hotel_sofa_beds = sf.scrape_criteria(hotel_citrine_palo_alto_soup, len(hcpa_scraped_member_rate))
+        room_types, hotel_king_beds, hotel_queen_beds, hotel_sofa_beds, views, location_list, balcony_exists, hotel_num_rooms = sf.scrape_criteria(hotel_citrine_palo_alto_soup, len(hcpa_scraped_member_rate))
         for i in range(len(hcpa_scraped_member_rate)):
             room_type.append(room_types[i])
             king_beds.append(hotel_king_beds[i])
             queen_beds.append(hotel_queen_beds[i])
             sofa_beds.append(hotel_sofa_beds[i])
+            view.append(views[i])
+            room_location.append(location_list[i])
+            balcony.append(balcony_exists[i])
+            num_rooms.append(hotel_num_rooms[i])
         break
 
 
@@ -266,7 +279,7 @@ while True:
     ## Navigate to the page with the rooms for this hotel
     try:
         driver.implicitly_wait(1)
-        submit_button = driver.find_element(by=By.XPATH, value='//*[@id="property-record-map-SJCAM"]/div/div[2]/div/div/a')
+        submit_button = driver.find_element(by=By.XPATH, value='//*[@id="property-record-map-SJCAM"]/div/div[2]/div/div/a/div')
         submit_button.click()
 
         ## Code to navigate from deals to standard prices
@@ -277,8 +290,6 @@ while True:
 
         aloft_mountain_view = driver.page_source
         aloft_mountain_view_soup = BeautifulSoup(aloft_mountain_view, "html.parser")
-
-        time.sleep(5)
         
     
     except:
@@ -287,10 +298,8 @@ while True:
 
     else:
         amv_scraped_member_rate, amv_scraped_normal_rate = sf.scrape_rates_by_type(aloft_mountain_view_soup)
-        print("member rates: ", amv_scraped_member_rate)
         for rate in amv_scraped_member_rate:
             member_rate.append(rate)
-        print("normal rates: ", amv_scraped_normal_rate)
         for rate in amv_scraped_normal_rate:
             normal_rate.append(rate)
 
@@ -298,26 +307,38 @@ while True:
         for i in amv_scraped_member_rate:
             hotel_name.append("Aloft Mountain View")
 
-        room_types, hotel_king_beds, hotel_queen_beds, hotel_sofa_beds = sf.scrape_criteria(aloft_mountain_view_soup, len(amv_scraped_member_rate))
+        room_types, hotel_king_beds, hotel_queen_beds, hotel_sofa_beds, views, location_list, balcony_exists, hotel_num_rooms = sf.scrape_criteria(aloft_mountain_view_soup, len(amv_scraped_member_rate))
         
+        print(room_types)
+        print(len(room_types))
+        print(len(amv_scraped_member_rate))
         for i in range(len(amv_scraped_member_rate)):
             room_type.append(room_types[i])
             king_beds.append(hotel_king_beds[i])
             queen_beds.append(hotel_queen_beds[i])
             sofa_beds.append(hotel_sofa_beds[i])
+            view.append(views[i])
+            room_location.append(location_list[i])
+            balcony.append(balcony_exists[i])
+            num_rooms.append(hotel_num_rooms[i])
         break
+driver.close()
 
-print(member_rate)
-print(len(member_rate))
-print(normal_rate)
-print(len(normal_rate))
-print(hotel_name)
-print(len(hotel_name))
-print(room_type)
-print(len(room_type))
-print(king_beds)
-print(len(king_beds))
-print(queen_beds)
-print(len(queen_beds))
-print(sofa_beds)
-print(len(sofa_beds))
+
+dict = {
+    'Member Rate': member_rate,
+    'Normal Rate': normal_rate,
+    'Hotel Name': hotel_name,
+    'Room Type': room_type,
+    'Num. King Beds': king_beds,
+    'Num. Queen Beds': queen_beds,
+    'Num. Sofa Beds': sofa_beds,
+    'View': view,
+    'Room Location': room_location,
+    'Balcony': balcony,
+    'Num. Rooms': num_rooms
+}
+
+df = pd.DataFrame(dict)
+pd.set_option('display.max_columns', None)
+print(df.to_string())
