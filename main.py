@@ -10,14 +10,28 @@ import numpy as np
 import tkinter as tk
 
 window = tk.Tk()
+window.title("Marriott Hotel Price Scraper")
+window.geometry("500x500")
+
 
 label = tk.Label(
     text="Hello, Tkinter",
-    foreground="white",  # Set the text color to white
-    background="black"  # Set the background color to black
+    fg="white",
+    bg="black",
+    width=10,
+    height=10
 )
+label.place(x=0, y=0)
 
-label.pack()
+button = tk.Button(
+    text="Click me!",
+    width=25,
+    height=5,
+    bg="blue",
+    fg="yellow",
+)
+button.place(x=300, y=300)
+
 
 window.mainloop()
 
