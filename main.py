@@ -348,15 +348,16 @@ import tkinter as tk
 window = tk.Tk()
 window.title("Marriott Hotel Price Scraper")
 window.geometry("600x300")
-3
-canvas = tk.Canvas(window, width=600, height=300)
-canvas.grid(columnspan=5, rowspan=3)
+window.grid()
 
 start_button = tk.Button(text="Start", command=run_scraping, bg="grey", fg="white", font=("Arial", 12, "italic"), )
 start_button.grid(column=1, row=1)
 
-window.mainloop()
+close_button = tk.Button(text="Close", command=window.quit, bg="grey", fg="white", font=("Arial", 12, "italic"))
+close_button.grid(column=3, row=1)
+                    
 
+window.mainloop
 
 
 
