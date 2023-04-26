@@ -5,6 +5,8 @@ import pandas as pd
 from matplotlib import pyplot as plt
 import numpy as np
 
+df = pd.DataFrame()
+
 def run_scraping():
     # Selenium import and setup code
     from selenium import webdriver
@@ -64,7 +66,7 @@ def run_scraping():
             residence_inn_palo_alto_mountain_view = driver.page_source
             residence_inn_palo_alto_mountain_view_soup = BeautifulSoup(residence_inn_palo_alto_mountain_view, "html.parser")
 
-            
+
 
         except:
             print("error finding this element by text: ", "Residence Inn Palo Alto Mountain View")
@@ -240,7 +242,7 @@ def run_scraping():
             hotel_citrine_palo_alto = driver.page_source
             hotel_citrine_palo_alto_soup = BeautifulSoup(hotel_citrine_palo_alto, "html.parser")
 
-        
+
         except:
             print("error finding this element by XPATH: ", "Hotel Citrine Palo Alto")
             break
@@ -284,12 +286,12 @@ def run_scraping():
             driver.implicitly_wait(1)
             submit_button = driver.find_element(by=By.XPATH, value='//*[@id="ui-id-1"]/span[1]')
             submit_button.click()
-            
+
 
             aloft_mountain_view = driver.page_source
             aloft_mountain_view_soup = BeautifulSoup(aloft_mountain_view, "html.parser")
-            
-        
+
+
         except:
             print("error finding this element by XPATH: ", "Aloft Mountain View")
             break
@@ -306,7 +308,7 @@ def run_scraping():
                 hotel_name.append("Aloft Mountain View")
 
             room_types, hotel_king_beds, hotel_queen_beds, hotel_sofa_beds, views, location_list, balcony_exists, hotel_num_rooms = sf.scrape_criteria(aloft_mountain_view_soup, len(amv_scraped_member_rate))
-            
+
             print(room_types)
             print(len(room_types))
             print(len(amv_scraped_member_rate))
@@ -340,7 +342,12 @@ def run_scraping():
     df = pd.DataFrame(dict)
     pd.set_option('display.max_columns', None)
     print(df.to_string())
-    return df
+
+def download_data():
+    print("Please enter the name of the excel file you would like to save the data as")
+    file_name = input()
+    file_name = file_name + ".xlsx"
+    df.to_excel(file_name, index=False)
 
 ## GUI Setup Code
 import tkinter as tk
@@ -348,16 +355,17 @@ import tkinter as tk
 window = tk.Tk()
 window.title("Marriott Hotel Price Scraper")
 window.geometry("600x300")
-window.grid()
 
-start_button = tk.Button(text="Start", command=run_scraping, bg="grey", fg="white", font=("Arial", 12, "italic"), )
+canvas = tk.Canvas(window, width=600, height=300)
+canvas.grid(columnspan=5, rowspan=3)
+
+start_button = tk.Button(text="Start", command=run_scraping, bg="grey", fg="white", font=("Arial", 12, "italic"))
 start_button.grid(column=1, row=1)
 
-close_button = tk.Button(text="Close", command=window.quit, bg="grey", fg="white", font=("Arial", 12, "italic"))
+close_button = tk.Button(text="Close", command=window.destroy, bg="grey", fg="white", font=("Arial", 12, "italic"))
 close_button.grid(column=3, row=1)
-                    
 
-window.mainloop
+download_button = tk.Button(text="Download", command=download_data, bg="grey", fg="white", font=("Arial", 12, "italic"))
+download_button.grid(column=2, row=2)
 
-
-
+window.mainloop()
