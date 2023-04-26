@@ -340,8 +340,9 @@ def run_scraping():
     }
 
     df = pd.DataFrame(dict)
-    pd.set_option('display.max_columns', None)
-    print(df.to_string())
+pd.set_option('display.max_columns', None)
+print(df.to_string())
+print("printed")
 
 def download_data():
     print("Please enter the name of the excel file you would like to save the data as")
