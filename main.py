@@ -348,7 +348,7 @@ import tkinter as tk
 window = tk.Tk()
 window.title("Marriott Hotel Price Scraper")
 window.geometry("600x300")
-
+3
 canvas = tk.Canvas(window, width=600, height=300)
 canvas.grid(columnspan=5, rowspan=3)
 
