@@ -343,11 +343,7 @@ def run_scraping():
     df = pd.DataFrame(dict)
     pd.set_option('display.max_columns', None)
     print(df.to_string())
-    print("printed")
-    print("Please enter the name of the excel file you would like to save the data as")
-    file_name = input()
-    file_name = file_name + ".xlsx"
-    df.to_excel(file_name, index=False)
+    df.to_excel("Hotel Room Prices.xlsx", index=False)
     
 
 ## GUI Setup Code
