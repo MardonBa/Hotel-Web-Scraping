@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 from matplotlib import pyplot as plt
 import numpy as np
+import time
 
 df = pd.DataFrame()
 
@@ -340,15 +341,14 @@ def run_scraping():
     }
 
     df = pd.DataFrame(dict)
-pd.set_option('display.max_columns', None)
-print(df.to_string())
-print("printed")
-
-def download_data():
+    pd.set_option('display.max_columns', None)
+    print(df.to_string())
+    print("printed")
     print("Please enter the name of the excel file you would like to save the data as")
     file_name = input()
     file_name = file_name + ".xlsx"
     df.to_excel(file_name, index=False)
+    
 
 ## GUI Setup Code
 import tkinter as tk
@@ -363,10 +363,7 @@ canvas.grid(columnspan=5, rowspan=3)
 start_button = tk.Button(text="Start", command=run_scraping, bg="grey", fg="white", font=("Arial", 12, "italic"))
 start_button.grid(column=1, row=1)
 
-close_button = tk.Button(text="Close", command=window.destroy, bg="grey", fg="white", font=("Arial", 12, "italic"))
-close_button.grid(column=3, row=1)
-
-download_button = tk.Button(text="Download", command=download_data, bg="grey", fg="white", font=("Arial", 12, "italic"))
-download_button.grid(column=2, row=2)
+download_button = tk.Button(text="Download and Close", command=window.destroy, bg="grey", fg="white", font=("Arial", 12, "italic"))
+download_button.grid(column=3, row=1)
 
 window.mainloop()
