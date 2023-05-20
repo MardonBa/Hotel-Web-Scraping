@@ -327,8 +327,6 @@ def run_scraping():
 
 
     dict = {
-        'Member Rate': member_rate,
-        'Normal Rate': normal_rate,
         'Hotel Name': hotel_name,
         'Room Type': room_type,
         'Num. King Beds': king_beds,
@@ -337,7 +335,9 @@ def run_scraping():
         'View': view,
         'Room Location': room_location,
         'Balcony': balcony,
-        'Num. Rooms': num_rooms
+        'Num. Rooms': num_rooms,
+        'Member Rate': member_rate,
+        'Normal Rate': normal_rate
     }
 
     df = pd.DataFrame(dict)
