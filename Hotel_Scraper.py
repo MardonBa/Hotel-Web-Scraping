@@ -2,11 +2,12 @@ import scraping_functions as sf
 
 from bs4 import BeautifulSoup
 import pandas as pd
-from matplotlib import pyplot as plt
-import numpy as np
-import time
+from datetime import date
 
 df = pd.DataFrame()
+
+today = date.today()
+today = str(today)
 
 def run_scraping():
     # Selenium import and setup code
@@ -42,6 +43,7 @@ def run_scraping():
     ## Then creating a BeautifulSoup instance title webpagename_soup
 
     ## Creating the lists for every criteria as well as prices to be later put in a DataFrame
+    date = []
     hotel_name = []
     king_beds = []
     queen_beds = []
@@ -53,8 +55,6 @@ def run_scraping():
     balcony = []
     normal_rate = []
     member_rate = []
-    prepaid_normal_rate = []
-    prepaid_member_rate = []
 
     ## Residence Inn Palo Alto Mountain View
     while True:
@@ -90,6 +90,7 @@ def run_scraping():
 
             room_types, hotel_king_beds, hotel_queen_beds, hotel_sofa_beds, views, location_list, balcony_exists, hotel_num_rooms = sf.scrape_criteria(residence_inn_palo_alto_mountain_view_soup, len(ripamv_scraped_member_rate))
             for i in range(len(ripamv_scraped_normal_rate)):
+                date.append(today)
                 room_type.append(room_types[i])
                 king_beds.append(hotel_king_beds[i])
                 queen_beds.append(hotel_queen_beds[i])
@@ -135,6 +136,7 @@ def run_scraping():
 
             room_types, hotel_king_beds, hotel_queen_beds, hotel_sofa_beds, views, location_list, balcony_exists, hotel_num_rooms = sf.scrape_criteria(residence_inn_palo_alto_los_altos_soup, len(ripala_scraped_member_rate))
             for i in range(len(ripala_scraped_member_rate)):
+                date.append(today)
                 room_type.append(room_types[i])
                 king_beds.append(hotel_king_beds[i])
                 queen_beds.append(hotel_queen_beds[i])
@@ -178,6 +180,7 @@ def run_scraping():
 
             room_types, hotel_king_beds, hotel_queen_beds, hotel_sofa_beds, views, location_list, balcony_exists, hotel_num_rooms = sf.scrape_criteria(courtyard_palo_alto_los_altos_soup, len(cpala_scraped_member_rate))
             for i in range(len(cpala_scraped_member_rate)):
+                date.append(today)
                 room_type.append(room_types[i])
                 king_beds.append(hotel_king_beds[i])
                 queen_beds.append(hotel_queen_beds[i])
@@ -221,6 +224,7 @@ def run_scraping():
 
             room_types, hotel_king_beds, hotel_queen_beds, hotel_sofa_beds, views, location_list, balcony_exists, hotel_num_rooms = sf.scrape_criteria(ac_hotel_palo_alto_soup, len(achpa_scraped_member_rate))
             for i in range(len(achpa_scraped_member_rate)):
+                date.append(today)
                 room_type.append(room_types[i])
                 king_beds.append(hotel_king_beds[i])
                 queen_beds.append(hotel_queen_beds[i])
@@ -264,6 +268,7 @@ def run_scraping():
 
             room_types, hotel_king_beds, hotel_queen_beds, hotel_sofa_beds, views, location_list, balcony_exists, hotel_num_rooms = sf.scrape_criteria(hotel_citrine_palo_alto_soup, len(hcpa_scraped_member_rate))
             for i in range(len(hcpa_scraped_member_rate)):
+                date.append(today)
                 room_type.append(room_types[i])
                 king_beds.append(hotel_king_beds[i])
                 queen_beds.append(hotel_queen_beds[i])
@@ -314,6 +319,7 @@ def run_scraping():
             print(len(room_types))
             print(len(amv_scraped_member_rate))
             for i in range(len(amv_scraped_member_rate)):
+                date.append(today)
                 room_type.append(room_types[i])
                 king_beds.append(hotel_king_beds[i])
                 queen_beds.append(hotel_queen_beds[i])
@@ -327,6 +333,7 @@ def run_scraping():
 
 
     dict = {
+        'Date': date,
         'Hotel Name': hotel_name,
         'Room Type': room_type,
         'Num. King Beds': king_beds,
