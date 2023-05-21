@@ -175,8 +175,9 @@ def scrape_balcony(room_name_list, num_prices):
 def scrape_num_rooms(room_name_list, num_prices):
     num_rooms = []
     for i in range(num_prices):
+        print(room_name_list[i])
         if "Penthouse Suite" in room_name_list[i]:
-            num_rooms.append(2)
+            num_rooms.append(3)
         elif "2 Bedroom Suite" in room_name_list[i]:
             num_rooms.append(3)
         elif "2 room Suite" in room_name_list[i]:
