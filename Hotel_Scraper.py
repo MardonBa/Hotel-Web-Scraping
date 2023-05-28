@@ -109,7 +109,7 @@ def run_scraping():
         ## Navigates to the page with rooms for this hotel
         try:
             driver.implicitly_wait(1)
-            submit_button = driver.find_element(by=By.XPATH, value='//*[@id="property-record-map-PAORI"]/div/div[2]/div/div/a')
+            submit_button = driver.find_element(by=By.XPATH, value='//*[@id="property-record-map-PAORI"]/div/div[2]/div/div/a/div')
             submit_button.click()
 
             residence_inn_palo_alto_los_altos = driver.page_source
@@ -156,7 +156,7 @@ def run_scraping():
         ## Navigate to the page with rooms for this hotel
         try:
             driver.implicitly_wait(1)
-            submit_button = driver.find_element(by=By.XPATH, value='//*[@id="property-record-map-PAOCY"]/div/div[2]/div/div/a')
+            submit_button = driver.find_element(by=By.XPATH, value='//*[@id="property-record-map-PAOCY"]/div/div[2]/div/div/a/div')
             submit_button.click()
 
             courtyard_palo_alto_los_altos = driver.page_source
@@ -201,7 +201,7 @@ def run_scraping():
         try:
             ## Navigate to the page with rooms for this hotel
             driver.implicitly_wait(1)
-            submit_button = driver.find_element(by=By.XPATH, value='//*[@id="property-record-map-SJCAO"]/div/div[2]/div/div/a')
+            submit_button = driver.find_element(by=By.XPATH, value='//*[@id="property-record-map-SJCAO"]/div/div[2]/div/div/a/div')
             submit_button.click()
 
             ac_hotel_palo_alto = driver.page_source
