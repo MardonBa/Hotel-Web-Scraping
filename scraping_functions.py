@@ -57,94 +57,8 @@ def scrape_rates_by_type(soup_name):
     return member_rates, normal_rates
     
 
-def scrape_room_types(room_name_list, num_prices, member_rates, normal_rates, hotel_name):
+def scrape_room_types(room_name_list, num_prices):
     room_type = []
-    ## Check the room name against the list of all real room names
-    ## if there is a room name in the actual list not in the scraped list make the rates SOLD OUT
-    ## if there is a room name that is in the scraped list and noy in the actual list add the rate as normal
-    ripamv_room_types = ["Queen Studio, Studio, 1 Queen(s), Sofa bed", "King Studio, Studio, 1 King, Sofa bed", "Penthouse Suite, Bedroom 1(Loft): 1 Queen(s), Bedroom 2: 1 Queen(s), Sofa bed"]
-    ripala_room_types = ["Studio, 1 Queen(s), Sofa bed", "1 Bedroom Suite, 1 Queen(s), Sofa bed", "2 Bedroom Suite, Bedroom 1: 1 Queen(s), Bedroom 2: 1 Queen(s), Sofa bed"]
-    cpala_room_types =  ["Guest room, 1 King, Sofa bed", "Guest room, 2 Queen(s)", "Larger Guest room, 1 King, Sofa bed", "Larger Guest room, 2 Queen(s), Sofa bed", "1 Bedroom 2 room Suite, 1 King, Sofa bed", "1 Bedroom 2 room Suite, 2 Queen(s), Sofa bed, Courtyard view"]
-    achpa_room_types = ["Guest room, 1 King", "Guest room, 2 Queen(s)", "Guest room, 1 King, Mountain view", "Guest room, 2 Queen(s), Mountain view", "Guest room, 1 King, Corner room", "Deluxe Guest room, 1 King", "Deluxe Guest room, 1 King, Mountain view, Balcony"]
-    hcpa_room_types =  ["Guest room, 1 King", "Guest room, 2 Queen(s)", "Guest room, 1 King, High floor", "Guest room, 2 Queen(s), High floor", "Deluxe Guest room, 1 King, Balcony", "Deluxe Guest room, 2 Queen(s), City view, Balcony", "1 Bedroom Suite, 1 King, Sofa bed", "Suite, Bedroom 1: 1 King, Bedroom 2: 2 Doubles, Sofa bed"]
-    amv_room_types = ["1 King Bed, Aloft Room", "1 King Bed, High Floor, Breezy Guest Room", "1 King Bed, Pool View, Aloft Room", "1 King Bed, Savvy Guest Room", "2 King Beds, Aloft Room", "1 King Bed, Pool View, High Floor, Breezy Guest Room", "1 King Bed, Corner, Junior Suite"]
-
-    if hotel_name == "ripamv":
-        for i, room_name in enumerate(ripamv_room_types):
-            print("room name being checked:", room_name)
-            try:
-                if room_name_list[i] != room_name:
-                    print("original room_name_list[i]:", room_name_list[i])
-                    member_rates.insert(i, "SOLD OUT") 
-                    normal_rates.insert(i, "SOLD OUT")
-                    room_name_list.insert(i, "placeholder")     ## Placeholder so that all the future values don't get messed up
-                    print("new room_name_list[i]", room_name_list[i])
-            except IndexError:
-                member_rates.append("SOLD OUT")
-                normal_rates.append("SOLD OUT")
-
-        room_name_list = ripamv_room_types      ## Used to set the list of room names to get the room types
-    elif hotel_name == "ripala":
-        for i, room_name in enumerate(ripala_room_types):
-            print("room name being checked:", room_name)
-            try:
-                if room_name_list[i] != room_name:
-                    member_rates.insert(i, "SOLD OUT") 
-                    normal_rates.insert(i, "SOLD OUT")
-                    room_name_list.insert(i, "placeholder")     ## Placeholder so that all the future values don't get messed up
-            except IndexError:
-                member_rates.append("SOLD OUT")
-                normal_rates.append("SOLD OUT")
-        room_name_list = ripala_room_types      ## Used to set the list of room names to get the room types
-    elif hotel_name == "cpala":
-        for i, room_name in enumerate(cpala_room_types):
-            print("room name being checked:", room_name)
-            try:
-                if room_name_list[i] != room_name:
-                    member_rates.insert(i, "SOLD OUT") 
-                    normal_rates.insert(i, "SOLD OUT")
-                    room_name_list.insert(i, "placeholder")     ## Placeholder so that all the future values don't get messed up
-            except IndexError:
-                member_rates.append("SOLD OUT")
-                normal_rates.append("SOLD OUT")
-        room_name_list = cpala_room_types      ## Used to set the list of room names to get the room types
-    elif hotel_name == "achpa":
-        for i, room_name in enumerate(achpa_room_types):
-            print("room name being checked:", room_name)
-            try:
-                if room_name_list[i] != room_name:
-                    member_rates.insert(i, "SOLD OUT") 
-                    normal_rates.insert(i, "SOLD OUT")
-                    room_name_list.insert(i, "placeholder")     ## Placeholder so that all the future values don't get messed up
-            except IndexError:
-                member_rates.append("SOLD OUT")
-                normal_rates.append("SOLD OUT")
-        room_name_list = achpa_room_types      ## Used to set the list of room names to get the room types
-    elif hotel_name == "hcpa":
-        for i, room_name in enumerate(hcpa_room_types):
-            print("room name being checked:", room_name)
-            try:
-                if room_name_list[i] != room_name:
-                    member_rates.insert(i, "SOLD OUT") 
-                    normal_rates.insert(i, "SOLD OUT")
-                    room_name_list.insert(i, "placeholder")     ## Placeholder so that all the future values don't get messed up
-            except IndexError:
-                member_rates.append("SOLD OUT")
-                member_rates.append("SOLD OUT")
-        room_name_list = hcpa_room_types      ## Used to set the list of room names to get the room types
-    elif hotel_name == "amv":
-        for i, room_name in enumerate(amv_room_types):
-            print("room name being checked:", room_name)
-            try:
-                if room_name_list[i] != room_name:
-                    member_rates.insert(i, "SOLD OUT") 
-                    member_rates.insert(i, "SOLD OUT")
-                    room_name_list.insert(i, "placeholder")     ## Placeholder so that all the future values don't get messed up
-            except IndexError:
-                member_rates.append("SOLD OUT")
-                member_rates.append("SOLD OUT")
-        room_name_list = amv_room_types      ## Used to set the list of room names to get the room types
-
     for i in range(num_prices):
         ## Code to add the room type to its own list
         ## Residence Inn Palo Alto Mountain View
@@ -189,7 +103,7 @@ def scrape_room_types(room_name_list, num_prices, member_rates, normal_rates, ho
         
 
 
-    return room_type, room_name_list, member_rates, normal_rates        ## room_name_list is returned so that the strings that would interfere in Residence Inn Palo Alto Mountain View don't affect later code
+    return room_type, room_name_list        ## room_name_list is returned so that the strings that would interfere in Residence Inn Palo Alto Mountain View don't affect later code
 
 def scrape_beds(room_name_list, num_prices):
     king_beds = [0 for i in range(num_prices)]
@@ -258,7 +172,24 @@ def scrape_balcony(room_name_list, num_prices):
 
     return balcony_list
 
-def scrape_criteria(soup_name, num_prices, member_rates, normal_rates, hotel_name):
+def scrape_num_rooms(room_name_list, num_prices):
+    num_rooms = []
+    for i in range(num_prices):
+        print(room_name_list[i])
+        if "Penthouse Suite" in room_name_list[i]:
+            num_rooms.append(3)
+        elif "2 Bedroom Suite" in room_name_list[i]:
+            num_rooms.append(3)
+        elif "2 room Suite" in room_name_list[i]:
+            num_rooms.append(2)
+        elif "1 Bedroom Suite" in room_name_list[i]:
+            num_rooms.append(2)
+        else:
+            num_rooms.append(1)
+
+    return num_rooms
+
+def scrape_criteria(soup_name, num_prices):
     room_name_list = []
     room_names = soup_name.find_all(attrs={'class': 'l-l-col-8 l-xl-col-8'})
     for name in room_names:
@@ -269,12 +200,12 @@ def scrape_criteria(soup_name, num_prices, member_rates, normal_rates, hotel_nam
 
     
 
-    room_type, new_room_name_list, member_rate, normal_rate = scrape_room_types(room_name_list, num_prices, member_rates, normal_rates, hotel_name)
+    room_type, new_room_name_list = scrape_room_types(room_name_list, num_prices)
     king_beds, queen_beds, sofa_beds = scrape_beds(new_room_name_list, num_prices)
     views = scrape_view(room_name_list, num_prices)
     location_list = scrape_room_location(room_name_list, num_prices)
     balcony = scrape_balcony(room_name_list, num_prices)
+    num_rooms = scrape_num_rooms(room_name_list, num_prices)
     
 
-    return room_type, king_beds, queen_beds, sofa_beds, views, location_list, balcony, member_rate, normal_rate
-
+    return room_type, king_beds, queen_beds, sofa_beds, views, location_list, balcony, num_rooms
