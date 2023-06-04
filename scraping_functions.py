@@ -22,7 +22,7 @@ def scrape_price(soup_name):
     return prices_list
 
 ## soup_name should be the BeautifulSoup instance for the hotel, class_name should be a css class as a string
-def scrape_rates_by_type(soup_name):
+def scrape_rates_by_type(soup_name, hotel_name):
 
     ## Initializing code
     prices_list = scrape_price(soup_name)
@@ -39,6 +39,33 @@ def scrape_rates_by_type(soup_name):
     ## Cleans the data
     for i, rate_type in enumerate(rate_type_list):
         rate_type_list[i] = clean_data(rate_type)
+
+    ## Scrape the room names, then compare it against the real room names to determine what is sold out
+    if hotel_name == "ripamv":
+        all_rooms_list = ["Queen Studio, Studio, 1 Queen(s), Sofa bed", "King Studio, Studio, 1 King, Sofa bed", "Penthouse Suite, Bedroom 1(Loft): 1 Queen(s), Bedroom 2: 1 Queen(s), Sofa bed"]
+    elif hotel_name == "ripala":
+        all_rooms_list = ["Studio, 1 Queen(s), Sofa bed", "1 Bedroom Suite, 1 Queen(s), Sofa bed", "2 Bedroom Suite, Bedroom 1: 1 Queen(s), Bedroom 2: 1 Queen(s), Sofa bed"]
+    elif hotel_name == "cpala":
+        all_rooms_list = ["Guest room, 1 King, Sofa bed", "Guest room, 2 Queen(s)", "Larger Guest room, 1 King, Sofa bed", "Larger Guest room, 2 Queen(s), Sofa bed", "1 Bedroom 2 room Suite, 1 King, Sofa bed", "1 Bedroom 2 room Suite, 2 Queen(s), Sofa bed, Courtyard view"]
+    elif hotel_name == "achpa":
+        all_rooms_list = ["Guest room, 1 King", "Guest room, 2 Queen(s)", "Guest room, 1 King, Mountain view", "Guest room, 2 Queen(s), Mountain view", "Guest room, 1 King, Corner room", "Deluxe Guest room, 1 King", "Deluxe Guest room, 1 King, Mountain view, Balcony"]
+    elif hotel_name == "hcpa":
+        all_rooms_list = ["Guest room, 1 King", "Guest room, 2 Queen(s)", "Guest room, 1 King, High floor", "Guest room, 2 Queen(s), High floor", "Deluxe Guest room, 1 King, Balcony", "Deluxe Guest room, 2 Queen(s), City view, Balcony", "1 Bedroom Suite, 1 King, Sofa bed", "Suite, Bedroom 1: 1 King, Bedroom 2: 2 Doubles, Sofa bed"]
+    elif hotel_name == "amv":
+        all_rooms_list = ["1 King Bed, Aloft Room", "1 King Bed, High Floor, Breezy Guest Room", "1 King Bed, Pool View, Aloft Room", "1 King Bed, Savvy Guest Room", "2 King Beds, Aloft Room", "1 King Bed, Pool View, High Floor, Breezy Guest Room", "1 King Bed, Corner, Junior Suite"]
+
+    ## Scrape room names to then compare
+    scraped_room_name_list = []
+    room_names = soup_name.find_all(attrs={'class': 'l-l-col-8 l-xl-col-8'})
+    for name in room_names:
+        scraped_room_name_list.append(name.get_text())
+    ## Cleans the data
+    for i, room in enumerate(scraped_room_name_list):
+        scraped_room_name_list[i] = clean_data(room)
+
+    sold_out_rooms = all_rooms_list - scraped_room_name_list
+    print("sold out rooms:", sold_out_rooms)
+
 
     ## Code to add the rate to member or normal rates
     for i, rate_type in enumerate(rate_type_list):
@@ -175,7 +202,6 @@ def scrape_balcony(room_name_list, num_prices):
 def scrape_num_rooms(room_name_list, num_prices):
     num_rooms = []
     for i in range(num_prices):
-        print(room_name_list[i])
         if "Penthouse Suite" in room_name_list[i]:
             num_rooms.append(3)
         elif "2 Bedroom Suite" in room_name_list[i]:

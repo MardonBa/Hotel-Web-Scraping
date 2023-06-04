@@ -315,9 +315,7 @@ def run_scraping():
 
             room_types, hotel_king_beds, hotel_queen_beds, hotel_sofa_beds, views, location_list, balcony_exists, hotel_num_rooms = sf.scrape_criteria(aloft_mountain_view_soup, len(amv_scraped_member_rate))
 
-            print(room_types)
-            print(len(room_types))
-            print(len(amv_scraped_member_rate))
+
             for i in range(len(amv_scraped_member_rate)):
                 date.append(today)
                 room_type.append(room_types[i])
