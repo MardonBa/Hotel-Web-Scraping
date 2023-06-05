@@ -63,8 +63,11 @@ def scrape_rates_by_type(soup_name, hotel_name):
     for i, room in enumerate(scraped_room_name_list):
         scraped_room_name_list[i] = clean_data(room)
 
-    sold_out_rooms = all_rooms_list - scraped_room_name_list
+    sold_out_rooms = [room for room in all_rooms_list if room not in scraped_room_name_list]
     print("sold out rooms:", sold_out_rooms)
+    sold_out_indexes = []
+    for room in sold_out_rooms:
+        sold_out_indexes.append(all_rooms_list.index(room))
 
 
     ## Code to add the rate to member or normal rates
@@ -81,12 +84,17 @@ def scrape_rates_by_type(soup_name, hotel_name):
         else:
             member_rates.append(prices_list[i])
 
+    for index in sold_out_indexes:
+        normal_rates.insert(index, "SOLD OUT")
+        member_rates.insert(index, "SOLD OUT")
+
     return member_rates, normal_rates
     
 
 def scrape_room_types(room_name_list, num_prices):
     room_type = []
     for i in range(num_prices):
+        print(i)
         ## Code to add the room type to its own list
         ## Residence Inn Palo Alto Mountain View
         ## Removes it from the string to prevent interference with counting beds
@@ -215,14 +223,19 @@ def scrape_num_rooms(room_name_list, num_prices):
 
     return num_rooms
 
-def scrape_criteria(soup_name, num_prices):
-    room_name_list = []
-    room_names = soup_name.find_all(attrs={'class': 'l-l-col-8 l-xl-col-8'})
-    for name in room_names:
-        room_name_list.append(name.get_text())
-    ## Cleans the data
-    for i, room in enumerate(room_name_list):
-        room_name_list[i] = clean_data(room)
+def scrape_criteria(soup_name, num_prices, hotel_name):
+    if hotel_name == "ripamv":
+        room_name_list = ["Queen Studio, Studio, 1 Queen(s), Sofa bed", "King Studio, Studio, 1 King, Sofa bed", "Penthouse Suite, Bedroom 1(Loft): 1 Queen(s), Bedroom 2: 1 Queen(s), Sofa bed"]
+    elif hotel_name == "ripala":
+        room_name_list = ["Studio, 1 Queen(s), Sofa bed", "1 Bedroom Suite, 1 Queen(s), Sofa bed", "2 Bedroom Suite, Bedroom 1: 1 Queen(s), Bedroom 2: 1 Queen(s), Sofa bed"]
+    elif hotel_name == "cpala":
+        room_name_list = ["Guest room, 1 King, Sofa bed", "Guest room, 2 Queen(s)", "Larger Guest room, 1 King, Sofa bed", "Larger Guest room, 2 Queen(s), Sofa bed", "1 Bedroom 2 room Suite, 1 King, Sofa bed", "1 Bedroom 2 room Suite, 2 Queen(s), Sofa bed, Courtyard view"]
+    elif hotel_name == "achpa":
+        room_name_list = ["Guest room, 1 King", "Guest room, 2 Queen(s)", "Guest room, 1 King, Mountain view", "Guest room, 2 Queen(s), Mountain view", "Guest room, 1 King, Corner room", "Deluxe Guest room, 1 King", "Deluxe Guest room, 1 King, Mountain view, Balcony"]
+    elif hotel_name == "hcpa":
+        room_name_list = ["Guest room, 1 King", "Guest room, 2 Queen(s)", "Guest room, 1 King, High floor", "Guest room, 2 Queen(s), High floor", "Deluxe Guest room, 1 King, Balcony", "Deluxe Guest room, 2 Queen(s), City view, Balcony", "1 Bedroom Suite, 1 King, Sofa bed", "Suite, Bedroom 1: 1 King, Bedroom 2: 2 Doubles, Sofa bed"]
+    elif hotel_name == "amv":
+        room_name_list = ["1 King Bed, Aloft Room", "1 King Bed, High Floor, Breezy Guest Room", "1 King Bed, Pool View, Aloft Room", "1 King Bed, Savvy Guest Room", "2 King Beds, Aloft Room", "1 King Bed, Pool View, High Floor, Breezy Guest Room", "1 King Bed, Corner, Junior Suite"]
 
     
 
